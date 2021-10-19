@@ -14,33 +14,39 @@ class Agenda{
 
     function __construct($nombre, $email)
     {
+        $contcookies=0;
+        $this->contcookies=$contcookies;
         $this->nombre=$nombre;
         $this->email=$email;
+
     }
 
     function posts(){
 
-        $listaNombres=array();
-        $this->listaNombres=$listaNombres;
-        $listaEmails=array();
+        $nombres=array();
+        $emails=array();
+        
+        
 
     if (isset($_POST["nombre"])) {
         $this->nombre=$_POST["nombre"];
+        $nombres=array_push($this->nombre);
+        setcookie("$this->contcookies", $this->nombre, time() + 36000); //guardamos la cookie del nombre
+        $this->contcookies++;
     }else {
         echo "El nombre esta vacio";
     }
     if (isset($_POST["email"])) {
         $this->email=$_POST["email"];
+        $emails=array_push($this->email);
+        setcookie("$this->contcookies", $this->email, time() + 36000); //guardamos la cookie del email
+        $this->contcookies++;
         
-    }else {
-        echo "El email esta vacio";
     }
 
     $this->nombre= strtolower($this->nombre);
     $this->email = strtolower($this->email);
 
-    array_push($listaNombres,$this->nombre);
-    array_push($listaEmails,$this->email);
 
     }
 
@@ -61,16 +67,25 @@ function crearAgenda(){
             
     echo "<table border= '1px solid black' padding= '2px' >";
     echo "<tr>";
-    for ($a=0; $a < count($this->listaNombres); $a++) { 
+    for ($i=0; $i < $this->contcookies; $i++) { 
+        echo "<td>"."Nombre: ". htmlspecialchars($_COOKIE["$i"]) ."</td>";
+        for ($z=0; $z < $this->contcookies; $z++) { 
+            $z++;
+            echo "<td>"."Email: ". htmlspecialchars($_COOKIE["$z"]) ."</td>";
 
-        
-        
+            
+        }
+        echo"</tr>";
+        echo"<tr>";
+
     }
-    echo "<td>"."Nombre: ".$this->nombre."</td>";
-    echo "<td>"."Email: ".$this->email."</td>";
+    echo "</tr";
+   
+    
+   
 
     
-    echo"</tr>";
+    
     echo "</table>";
 
 }
@@ -100,6 +115,9 @@ $Agenda->posts(1);
 
 $Agenda->crearAgenda();
 
+
+
+//https://www.discoduroderoer.es/pasar-un-array-en-un-formulario-php/
 ?>
 
 
