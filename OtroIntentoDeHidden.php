@@ -36,13 +36,13 @@
                         $i += 2;
                     }
                 }
-                $addEmail = $this->checkEmail($email);
+                $addEmail = $this->VerificarEmail($email);
                 if ($addEmail) {
                     $this->agenda[$name] = $email;
                 }
             }
 
-            function checkEmail($email) {
+            function VerificarEmail($email) {
                 $EmailsValidos = array("gmail.com", "gmail.es", "hotmail.com", "hotmail.es", "yahoo.com", "yahoo.es");
                 $contiene = strpos($email, "@");
                 if (empty($contiene)) {
