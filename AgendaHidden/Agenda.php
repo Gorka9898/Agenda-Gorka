@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-   <title>AgendaHidden</title>
+   <title>Agenda-Hidden</title>
 </head>
 <body>
 
@@ -36,8 +36,8 @@
                         $i += 2;
                     }
                 }
-                $addEmail = $this->VerificarEmail($email);
-                if ($addEmail) {
+                $AñadirEmail = $this->VerificarEmail($email);
+                if ($AñadirEmail) {
                     $this->agenda[$name] = $email;
                 }
             }
